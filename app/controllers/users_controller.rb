@@ -1,3 +1,9 @@
+require 'json'
+require "net/http"
+require "uri"
+include AuthHelper
+
+ENDPOINTS_URI = 'https://graph.api.smartthings.com/api/smartapps/endpoints'
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -5,6 +11,37 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+  end
+
+  def show
+    token = session[:access_token]
+    @user = User.find(params[:id])
+    url = URI.parse(ENDPOINTS_URI)
+    req = Net::HTTP::Get.new(url.request_uri)
+
+    req['Authorization'] = 'Bearer ' + token
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = (url.scheme == 'https')
+
+    response = http.request(req)
+    json = JSON.parse(response.body)
+
+    puts json
+
+    uri = json[0]['uri']
+    
+    puts 'Unlock the door with pin code'
+    
+    lockUrl = uri + '/code/1244'
+    getlockURL = URI.parse(lockUrl)
+    getlockReq = Net::HTTP::Put.new(getlockURL.request_uri)
+    getlockReq['Authorization'] = 'Bearer ' + token
+    getlockHttp = Net::HTTP.new(getlockURL.host, getlockURL.port)
+    getlockHttp.use_ssl = true
+    
+    lockStatus = getlockHttp.request(getlockReq)
+
   end
 
   # GET /users/1
@@ -16,10 +53,12 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    token = session[:access_token]
   end
 
   # GET /users/1/edit
   def edit
+    token = session[:access_token]
   end
 
   # POST /users
