@@ -1,6 +1,6 @@
 module AuthHelper
-    CLIENT_ID = '7022b5c7-5b9c-422e-a4ac-79a0fc520b3c' 
-    CLIENT_SECRET = 'bbaa97fe-0de8-47a7-85ee-33d3acd45087'
+    CLIENT_ID = '8508670b-6f53-4f2a-a9ba-7d0a16d2237f' 
+    CLIENT_SECRET = 'f481de3a-761c-4cda-a1c4-64b68ca98969'
     REDIRECT_URI = 'http://localhost:4567/oauth/callback'
   
     def get_login_url
@@ -25,5 +25,9 @@ module AuthHelper
       token = client.auth_code.get_token(auth_code,
                                   :redirect_uri => REDIRECT_URI,
                                   :scope => 'app')
+    end
+
+    def authenticated?
+      session[:access_token]
     end
 end

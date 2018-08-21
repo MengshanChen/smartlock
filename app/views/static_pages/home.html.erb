@@ -4,9 +4,23 @@
     <title>Home</title>
   </head>
   <body>
+  <% if logged_in? %>
+    <button class="btn btn-info" style= "color: white"><%= link_to "Profile", current_user %></button>
+    <% if authenticated? %>
+      <div>
+      <br>
+      <a class="btn btn-success" href="<%= get_login_url %>" role="button" id="connect-button" style= "color: white">Connect to SmartThings</a>
+      </div>
+    <% else %>
+      <a class="btn btn-success" href="/oauth/callback" role="button" id="connect-button" style= "color: white">Add new codes</a>
+    <% end %>
+  <% else %>
     <h1>Smart Lock</h1>
-    <p>
-      This is the home page
-    </p>
+    <center>
+      <p>
+        A lock manager helps you to manage your lock. Please Sign Up or Log In!
+      </p>
+    </center>
+  <% end %>
   </body>
 </html>
