@@ -10,7 +10,7 @@ class PincodesController < ApplicationController
 
   # GET /pincodes/1
   # GET /pincodes/1.json
-  def show
+  def show      
     token = session[:access_token]
     url = URI.parse(ENDPOINTS_URI)
     req = Net::HTTP::Get.new(url.request_uri)
@@ -27,9 +27,14 @@ class PincodesController < ApplicationController
 
     uri = json[0]['uri']
     
+    pincode = Pincode.last
+    test = pincode.pcode.to_s
+
+    puts test
+
     puts 'Unlock the door with pin code'
-    
-    lockUrl = uri + '/code/1244'
+
+    lockUrl = uri + '/code/' + test
     getlockURL = URI.parse(lockUrl)
     getlockReq = Net::HTTP::Put.new(getlockURL.request_uri)
     getlockReq['Authorization'] = 'Bearer ' + token
