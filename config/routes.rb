@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :users 
+  resources :pincodes
   get 'sessions/new'
   root 'static_pages#home'
   get  '/about',   to: 'static_pages#about'
@@ -7,7 +9,6 @@ Rails.application.routes.draw do
   get  '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  get '/oauth/callback' => 'auth#get_token'
-  resources :users
+  get '/oauth/callback' => 'pincodes#new'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

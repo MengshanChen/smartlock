@@ -4,6 +4,6 @@ class AuthController < ApplicationController
     def get_token
       token = get_token_from_code params[:code]
       session[:access_token] = token.token
-      puts session[:access_token]
+      puts "Token is " + session[:access_token]
     end
 end

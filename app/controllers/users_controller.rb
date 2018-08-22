@@ -13,37 +13,6 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def show
-    token = session[:access_token]
-    @user = User.find(params[:id])
-    url = URI.parse(ENDPOINTS_URI)
-    req = Net::HTTP::Get.new(url.request_uri)
-
-    req['Authorization'] = 'Bearer ' + token
-
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = (url.scheme == 'https')
-
-    response = http.request(req)
-    json = JSON.parse(response.body)
-
-    puts json
-
-    uri = json[0]['uri']
-    
-    puts 'Unlock the door with pin code'
-    
-    lockUrl = uri + '/code/1244'
-    getlockURL = URI.parse(lockUrl)
-    getlockReq = Net::HTTP::Put.new(getlockURL.request_uri)
-    getlockReq['Authorization'] = 'Bearer ' + token
-    getlockHttp = Net::HTTP.new(getlockURL.host, getlockURL.port)
-    getlockHttp.use_ssl = true
-    
-    lockStatus = getlockHttp.request(getlockReq)
-
-  end
-
   # GET /users/1
   # GET /users/1.json
   def show
@@ -65,23 +34,20 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        log_in @user
-        flash[:success] = "Welcome to Smart Lock!"
-        redirect_to @user
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      log_in @user
+      flash[:success] = "Welcome to Smart Lock!"
+      redirect_to @user
+    else
+      format.html { render :new }
+      format.json { render json: @user.errors, status: :unprocessable_entity }
     end
   end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
+    respond_to do |format| 
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }

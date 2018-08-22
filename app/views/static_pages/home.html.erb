@@ -4,16 +4,18 @@
     <title>Home</title>
   </head>
   <body>
+  <center>
   <% if logged_in? %>
     <button class="btn btn-info" style= "color: white"><%= link_to "Profile", current_user %></button>
-    <% if authenticated? %>
-      <div>
-      <br>
-      <a class="btn btn-success" href="<%= get_login_url %>" role="button" id="connect-button" style= "color: white">Connect to SmartThings</a>
-      </div>
-    <% else %>
-      <a class="btn btn-success" href="/oauth/callback" role="button" id="connect-button" style= "color: white">Add new codes</a>
-    <% end %>
+    <div>
+    <br>
+    <a class="btn btn-success" href="<%= get_login_url %>" role="button" id="connect-button" style= "color: white">Connect to SmartThings</a>
+    </div>
+    <div>
+    <br>
+    <h2>If you already connected to your device, please add your pin codes</h2>
+    <a class="btn btn-success" href="/oauth/callback" role="button" id="connect-button" style= "color: white">Add new codes</a>
+    </div>
   <% else %>
     <h1>Smart Lock</h1>
     <center>
@@ -22,5 +24,6 @@
       </p>
     </center>
   <% end %>
+  </center>
   </body>
 </html>

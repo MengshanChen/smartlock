@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Pincodes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Pcode</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pincodes.each do |pincode| %>
+      <tr>
+        <td><%= pincode.username %></td>
+        <td><%= pincode.pcode %></td>
+        <td><%= link_to 'Show', pincode %></td>
+        <td><%= link_to 'Edit', edit_pincode_path(pincode) %></td>
+        <td><%= link_to 'Destroy', pincode, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pincode', new_pincode_path %> |
+<%= link_to 'Back to Home', root_path %>

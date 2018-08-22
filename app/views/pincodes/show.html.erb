@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @pincode.username %>
+</p>
+
+<p>
+  <strong>Pcode:</strong>
+  <%= @pincode.pcode %>
+</p>
+
+<%= link_to 'Edit', edit_pincode_path(@pincode) %> |
+<%= link_to 'Back', pincodes_path %>

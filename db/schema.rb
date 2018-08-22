@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_16_203341) do
+ActiveRecord::Schema.define(version: 2018_08_22_034139) do
+
+  create_table "pincodes", force: :cascade do |t|
+    t.string "username"
+    t.integer "pcode"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"

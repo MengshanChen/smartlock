@@ -1,0 +1,27 @@
+<%= form_with(model: pincode, local: true) do |form| %>
+  <% if pincode.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pincode.errors.count, "error") %> prohibited this pincode from being saved:</h2>
+
+      <ul>
+      <% pincode.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :username %>
+    <%= form.text_field :username %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pcode %>
+    <%= form.number_field :pcode %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
