@@ -1,6 +1,6 @@
 class PincodesController < ApplicationController
-  before_action :set_pincode, only: [:show, :edit, :update, :destroy]
   include AuthHelper
+  before_action :set_pincode, only: [:show, :edit, :update, :destroy]
 
   # GET /pincodes
   # GET /pincodes.json
@@ -12,6 +12,8 @@ class PincodesController < ApplicationController
   # GET /pincodes/1.json
   def show      
     token = session[:access_token]
+    puts 'Token is ' + token
+
     url = URI.parse(ENDPOINTS_URI)
     req = Net::HTTP::Get.new(url.request_uri)
 
@@ -22,8 +24,6 @@ class PincodesController < ApplicationController
 
     response = http.request(req)
     json = JSON.parse(response.body)
-
-    puts json
 
     uri = json[0]['uri']
     
@@ -60,7 +60,8 @@ class PincodesController < ApplicationController
 
     respond_to do |format|
       if @pincode.save
-        format.html { redirect_to @pincode, notice: 'Pincode was successfully created.' }
+        #format.html { redirect_to @pincode, notice: 'Pincode was successfully created.' }
+        format.html { redirect_to @pincode}
         format.json { render :show, status: :created, location: @pincode }
       else
         format.html { render :new }
