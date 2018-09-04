@@ -1,7 +1,9 @@
 <html>
 <p>
-<%= link_to 'Continue to Users', controller: 'users' %>
 <br>
-<a class="btn btn-success" href="/oauth/callback" role="button" id="connect-button" style= "color: white">Add new codes</a>
+<%= link_to 'New pincode', new_pincode_path %> 
+<br>
+<%= link_to 'Back', pincodes_path %>
+<%= link_to 'Continue to Users', controller: 'users' %>
 </p>
 </html>

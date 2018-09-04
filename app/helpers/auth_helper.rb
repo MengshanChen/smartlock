@@ -1,6 +1,6 @@
 module AuthHelper
-  CLIENT_ID = '8508670b-6f53-4f2a-a9ba-7d0a16d2237f' 
-  CLIENT_SECRET = 'f481de3a-761c-4cda-a1c4-64b68ca98969'
+  CLIENT_ID = '0221ea6b-71da-47d0-bc54-0ec2d2b70c02' 
+  CLIENT_SECRET = 'd2edef94-8539-43bb-9a0f-8ed2e3374bf7'
   REDIRECT_URI = 'http://localhost:4567/oauth/callback'
   ENDPOINTS_URI = 'https://graph.api.smartthings.com/api/smartapps/endpoints'
 
@@ -28,9 +28,4 @@ module AuthHelper
                                 :scope => 'app')
   end
 
-  def authentication?
-    token = get_token_from_code params[:code]
-    session[:access_token] = token.token
-    session[:access_token]
-  end
 end

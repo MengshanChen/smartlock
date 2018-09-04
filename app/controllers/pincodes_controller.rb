@@ -1,3 +1,5 @@
+require 'net/http'
+require 'json'
 class PincodesController < ApplicationController
   include AuthHelper
   before_action :set_pincode, only: [:show, :edit, :update, :destroy]
