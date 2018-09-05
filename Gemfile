@@ -65,10 +65,6 @@ group :development do
   gem 'spring-watcher-listen', '2.0.1'
 end
 
-group :production do
-  gem 'pg', '0.20.0'
-end
-
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
@@ -84,3 +80,4 @@ gem 'omniauth'
 gem 'omniauth-oauth2'
 gem 'oauth2'
 gem 'activerecord-session_store'
+gem 'twilio-ruby'

