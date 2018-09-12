@@ -1,11 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Pincodes</h1>
+<p>At most 19 Pin Codes</p>
 
 <table>
   <thead>
     <tr>
-      <th>Username</th>
+      <th>Slot</th>
+      <th>Name</th>
       <th>Pcode</th>
       <th colspan="3"></th>
     </tr>
@@ -14,6 +16,7 @@
   <tbody>
     <% @pincodes.each do |pincode| %>
       <tr>
+        <td><%= pincode.slot %></td>
         <td><%= pincode.username %></td>
         <td><%= pincode.pcode %></td>
         <td><%= link_to 'Show', pincode %></td>

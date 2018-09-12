@@ -42,6 +42,8 @@ class PincodesController < ApplicationController
     
     pincode = Pincode.last
     test = pincode.pcode.to_s
+    test2 = pincode.slot.to_s
+    test = test2 + "-" + test
 
     puts test
 
@@ -70,7 +72,7 @@ class PincodesController < ApplicationController
   # POST /pincodes.json
   def create
     @pincode = Pincode.new(pincode_params)
-
+    
     respond_to do |format|
       if @pincode.save
         #format.html { redirect_to @pincode, notice: 'Pincode was successfully created.' }
@@ -104,6 +106,34 @@ class PincodesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to pincodes_url, notice: 'Pincode was successfully destroyed.' }
       format.json { head :no_content }
+
+      token = session[:access_token]
+      url = URI.parse(ENDPOINTS_URI)
+      req = Net::HTTP::Get.new(url.request_uri)
+
+      req['Authorization'] = 'Bearer ' + token
+
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = (url.scheme == 'https')
+
+      response = http.request(req)
+      json = JSON.parse(response.body)
+
+      uri = json[0]['uri']
+    
+      puts 'destroy pin code'
+
+      #@pincode = Pincode.find(params[:slot])
+      test = @pincode.slot
+      puts test
+
+      lockUrl = uri + '/delete/' + test.to_s
+      getlockURL = URI.parse(lockUrl)
+      getlockReq = Net::HTTP::Put.new(getlockURL.request_uri)
+      getlockReq['Authorization'] = 'Bearer ' + token
+      getlockHttp = Net::HTTP.new(getlockURL.host, getlockURL.port)
+      getlockHttp.use_ssl = true
+      lockStatus = getlockHttp.request(getlockReq)
     end
   end
 
@@ -115,6 +145,6 @@ class PincodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pincode_params
-      params.require(:pincode).permit(:username, :pcode)
+      params.require(:pincode).permit(:slot, :username, :pcode)
     end
 end
