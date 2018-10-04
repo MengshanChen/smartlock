@@ -1,6 +1,6 @@
 module AuthHelper
-  CLIENT_ID = '96599e82-0aca-4211-80d6-8a8b4f52d20f' 
-  CLIENT_SECRET = '6fff357b-9e70-490a-a6af-61d3517c75e6'
+  CLIENT_ID = 'xxxx' 
+  CLIENT_SECRET = 'xxxx'
   REDIRECT_URI = 'http://localhost:4567/oauth/callback'
   ENDPOINTS_URI = 'https://graph.api.smartthings.com/api/smartapps/endpoints'
 
